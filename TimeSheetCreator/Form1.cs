@@ -88,7 +88,7 @@ namespace TimeSheetCreator
             worksheet.Column(5).Width = ExcelHelper.Pixel2ColumnWidth(worksheet, 40);
             worksheet.Column(6).Width = ExcelHelper.Pixel2ColumnWidth(worksheet, 40);
             worksheet.Column(7).Width = ExcelHelper.Pixel2ColumnWidth(worksheet, 55);
-            worksheet.Column(8).Width = ExcelHelper.Pixel2ColumnWidth(worksheet, 31);
+            worksheet.Column(8).Width = ExcelHelper.Pixel2ColumnWidth(worksheet, 54);
             worksheet.Column(9).Width = ExcelHelper.Pixel2ColumnWidth(worksheet, 61);
             worksheet.Column(10).Width = ExcelHelper.Pixel2ColumnWidth(worksheet, 72);
         }
@@ -217,19 +217,15 @@ namespace TimeSheetCreator
 
             for (int i = start.Row; i <= end.Row; i++)
             {
-                worksheet.Cells[i, start.Column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[i, start.Column].Style.Border.Left.Style = worksheet.Cells[i, end.Column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
                 worksheet.Cells[i, start.Column].Style.Border.Left.Color.SetColor(Color.Black);
-
-                worksheet.Cells[i, end.Column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
                 worksheet.Cells[i, end.Column].Style.Border.Right.Color.SetColor(Color.Black);
             }
 
             for (int i = start.Column; i <= end.Column; i++)
             {
-                worksheet.Cells[start.Row, i].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[start.Row, i].Style.Border.Top.Style = worksheet.Cells[end.Row, i].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
                 worksheet.Cells[start.Row, i].Style.Border.Top.Color.SetColor(Color.Black);
-
-                worksheet.Cells[end.Row, i].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
                 worksheet.Cells[end.Row, i].Style.Border.Bottom.Color.SetColor(Color.Black);
             }
         }
@@ -246,10 +242,8 @@ namespace TimeSheetCreator
 
             for (int i = start.Row; i <= end.Row; i++)
             {
-                worksheet.Cells[i, start.Column].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                worksheet.Cells[i, start.Column].Style.Border.Left.Style = worksheet.Cells[i, end.Column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
                 worksheet.Cells[i, start.Column].Style.Border.Left.Color.SetColor(Color.Gray);
-
-                worksheet.Cells[i, end.Column].Style.Border.Right.Style = ExcelBorderStyle.Thin;
                 worksheet.Cells[i, end.Column].Style.Border.Right.Color.SetColor(Color.Gray);
             }
         }
@@ -300,7 +294,7 @@ namespace TimeSheetCreator
             CreateBoldText(worksheet.Cells["E4"], "In");
             CreateBoldText(worksheet.Cells["F4"], "Out");
             CreateBoldText(worksheet.Cells["G4"], "Straight");
-            CreateBoldText(worksheet.Cells["H4"], "Sick");
+            CreateBoldText(worksheet.Cells["H4"], "Holiday");
             CreateBoldText(worksheet.Cells["I4"], "Personal");
             CreateBoldText(worksheet.Cells["J4"], "Daily Total");
             
